@@ -41,34 +41,138 @@ La aplicación está diseñada para cargar sus preguntas desde un Gist público 
 5.  Pega el siguiente formato JSON en el área de contenido, asegurándote de usar **comillas dobles** para claves y valores de cadena y que la **respuesta comience con la letra indicada**:
 
     ```json
-    [
-        { "letter": "A", "clue": "Con la A: La estación del año que sigue al invierno.", "answer": "Primavera" },
-        { "letter": "B", "clue": "Con la B: Mamífero terrestre, de gran tamaño, con una trompa larga y orejas grandes.", "answer": "Elefante" },
-        { "letter": "C", "clue": "Con la C: Líquido incoloro e inodoro, esencial para la vida, que cubre la mayor parte de la Tierra.", "answer": "Agua" },
-        { "letter": "D", "clue": "Con la D: Metal precioso, muy valorado en joyería.", "answer": "Oro" },
-        { "letter": "E", "clue": "Con la E: El quinto planeta desde el Sol en nuestro sistema solar.", "answer": "Júpiter" },
-        { "letter": "F", "clue": "Con la F: Ciencia que estudia la composición de los alimentos.", "answer": "Bromología" },
-        { "letter": "G", "clue": "Con la G: Órgano muscular que bombea sangre por todo el cuerpo.", "answer": "Corazón" },
-        { "letter": "H", "clue": "Con la H: El primer elemento de la tabla periódica.", "answer": "Hidrógeno" },
-        { "letter": "I", "clue": "Con la I: País asiático famoso por el Taj Mahal.", "answer": "India" },
-        { "letter": "J", "clue": "Con la J: Género musical originado en Nueva Orleans a principios del siglo XX.", "answer": "Jazz" },
-        { "letter": "K", "clue": "Con la K: Unidad de medida de temperatura absoluta.", "answer": "Kelvin" },
-        { "letter": "L", "clue": "Con la L: Nuestro satélite natural.", "answer": "Luna" },
-        { "letter": "M", "clue": "Con la M: La capital de Francia.", "answer": "París" },
-        { "letter": "N", "clue": "Con la N: Un número impar entre el ocho y el diez.", "answer": "Nueve" },
-        { "letter": "O", "clue": "Con la O: El planeta rojo.", "answer": "Marte" },
-        { "letter": "P", "clue": "Con la P: Famoso explorador que realizó el primer viaje de circunnavegación del mundo.", "answer": "Magallanes" },
-        { "letter": "Q", "clue": "Con la Q: Famosa obra literaria de Cervantes.", "answer": "Quijote" },
-        { "letter": "R", "clue": "Con la R: Arte de bien decir, de embellecer la expresión de los conceptos.", "answer": "Retórica" },
-        { "letter": "S", "clue": "Con la S: Planeta con anillos visibles desde la Tierra.", "answer": "Saturno" },
-        { "letter": "T", "clue": "Con la T: La capital de Japón.", "answer": "Tokio" },
-        { "letter": "U", "clue": "Con la U: Instrumento musical de cuerda, similar a una pequeña guitarra.", "answer": "Ukelele" },
-        { "letter": "V", "clue": "Con la V: La estación del año que sigue al verano.", "answer": "Otoño" },
-        { "letter": "W", "clue": "Con la W: Plataforma en línea para compartir videos, propiedad de Google.", "answer": "YouTube" },
-        { "letter": "X", "clue": "Con la X: Instrumento musical de percusión con láminas de madera o metal.", "answer": "Xilófono" },
-        { "letter": "Y", "clue": "Con la Y: La capital de Uruguay.", "answer": "Montevideo" },
-        { "letter": "Z", "clue": "Con la Z: Animal africano conocido por sus rayas blancas y negras.", "answer": "Cebra" }
-    ]
+ [
+  {
+    "letter": "A",
+    "clue": "Con la A: Ave grande que no vuela y corre a gran velocidad.",
+    "answer": "Avestruz"
+  },
+  {
+    "letter": "B",
+    "clue": "Con la B: Mamífero plantígrado que hiberna en invierno.",
+    "answer": "Burro"
+  },
+  {
+    "letter": "C",
+    "clue": "Con la C: Reptil grande y acuático con dientes afilados.",
+    "answer": "Cocodrilo"
+  },
+  {
+    "letter": "D",
+    "clue": "Con la D: Mamífero con cuernos y cuerpo robusto, relacionado con el ganado.",
+    "answer": "Dromedario"
+  },
+  {
+    "letter": "E",
+    "clue": "Con la E: Mamífero terrestre con trompa larga.",
+    "answer": "Elefante"
+  },
+  {
+    "letter": "F",
+    "clue": "Con la F: Mamífero salvaje de pelaje rojizo, conocido por su astucia.",
+    "answer": "Foca"
+  },
+  {
+    "letter": "G",
+    "clue": "Con la G: Mamífero africano con cuello muy largo.",
+    "answer": "Girafa"
+  },
+  {
+    "letter": "H",
+    "clue": "Con la H: Animal doméstico usado para montar y trabajar.",
+    "answer": "Hipopótamo"
+  },
+  {
+    "letter": "I",
+    "clue": "Con la I: Ave zancuda de zonas húmedas, de plumaje blanco.",
+    "answer": "Ibis"
+  },
+  {
+    "letter": "J",
+    "clue": "Con la J: Felino grande y manchado que habita América.",
+    "answer": "Jaguar"
+  },
+  {
+    "letter": "K",
+    "clue": "Con la K: Marsupial australiano que duerme la mayor parte del día.",
+    "answer": "Koala"
+  },
+  {
+    "letter": "L",
+    "clue": "Con la L: Felino considerado el rey de la selva.",
+    "answer": "León"
+  },
+  {
+    "letter": "M",
+    "clue": "Con la M: Pequeño mamífero volador nocturno.",
+    "answer": "Murciélago"
+  },
+  {
+    "letter": "N",
+    "clue": "Con la N: Animal marino con caparazón, vive en playas tropicales.",
+    "answer": "Nautilo"
+  },
+  {
+    "letter": "O",
+    "clue": "Con la O: Mamífero marino grande, también llamado ballena asesina.",
+    "answer": "Orca"
+  },
+  {
+    "letter": "P",
+    "clue": "Con la P: Ave antártica que no vuela y camina erguida.",
+    "answer": "Pingüino"
+  },
+  {
+    "letter": "Q",
+    "clue": "Con la Q: Marsupial australiano pequeño y simpático.",
+    "answer": "Quokka"
+  },
+  {
+    "letter": "R",
+    "clue": "Con la R: Roedor común en ciudades y casas.",
+    "answer": "Ratón"
+  },
+  {
+    "letter": "S",
+    "clue": "Con la S: Reptil alargado y sin patas.",
+    "answer": "Serpiente"
+  },
+  {
+    "letter": "T",
+    "clue": "Con la T: Reptil con caparazón que vive en tierra o agua.",
+    "answer": "Tortuga"
+  },
+  {
+    "letter": "U",
+    "clue": "Con la U: Ave de plumaje negro y pico naranja, parecida al cuervo.",
+    "answer": "Urraca"
+  },
+  {
+    "letter": "V",
+    "clue": "Con la V: Murciélago que se alimenta de sangre.",
+    "answer": "Vampiro"
+  },
+  {
+    "letter": "W",
+    "clue": "Con la W: Pez rápido de aguas cálidas, también llamado peto.",
+    "answer": "Wahoo"
+  },
+  {
+    "letter": "X",
+    "clue": "Con la X: Pez tropical de acuario cuyo nombre comienza con X.",
+    "answer": "Xifóforo"
+  },
+  {
+    "letter": "Y",
+    "clue": "Con la Y: Bovino peludo usado como animal de carga en el Tíbet.",
+    "answer": "Yak"
+  },
+  {
+    "letter": "Z",
+    "clue": "Con la Z: Mamífero africano con rayas blancas y negras.",
+    "answer": "Zebra"
+  }
+]
     ```
     **Nota:** Las respuestas en el ejemplo anterior han sido ajustadas para que la palabra `answer` **siempre inicie con la `letter` correspondiente**, siguiendo la regla estricta de Pasapalabra.
 
