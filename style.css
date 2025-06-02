@@ -1,0 +1,526 @@
+/* Definición de variables CSS para colores */
+:root {
+    --main-bg-color: #282c34;
+    --text-color: #ffffff;
+    --accent-color: #61dafb; /* Color principal de acento */
+    --button-bg-color: #4CAF50; /* Color de fondo del botón Responder */
+    --button-hover-color: #45a049; /* Color de fondo del botón Responder al pasar el ratón */
+    --input-bg-color: #3a3f47; /* Color de fondo del campo de entrada */
+    --input-border-color: #555; /* Color del borde del campo de entrada */
+    --correct-answer-color: #28a745; /* Color para respuestas correctas */
+    --wrong-answer-color: #dc3545; /* Color para respuestas incorrectas */
+    --passed-color: #ffc107; /* Color para palabras pasadas */
+}
+
+/* Estilos generales del cuerpo de la página */
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra verticalmente el contenido principal */
+    min-height: 100vh; /* Altura mínima del 100% del viewport */
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px; /* Padding para el contenido general */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+    overflow-x: hidden; /* Evita barras de desplazamiento horizontal */
+    overflow-y: auto; /* Permite desplazamiento vertical si el contenido es demasiado alto */
+}
+
+/* Contenedor principal del juego */
+.game-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    gap: 40px; /* Espacio entre los elementos */
+    max-width: 1200px; /* Ancho máximo del contenedor */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    /* Se ha eliminado 'height: 100%;' para permitir el crecimiento natural del contenido */
+}
+
+/* Área que contiene el rosco */
+.rosco-area {
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    gap: 20px; /* Espacio entre el rosco y otros elementos si los hubiera */
+}
+
+/* Contenedor del rosco */
+.rosco-container {
+    position: relative;
+    width: 500px; /* Tamaño base fijo del rosco */
+    height: 500px;
+    max-width: 90vw; /* Asegura que se adapte a pantallas muy pequeñas (90% del ancho del viewport) */
+    max-height: 90vw; /* Asegura que se adapte a pantallas muy pequeñas (90% de la altura del viewport) */
+    border-radius: 50%; /* Hace que sea un círculo */
+    border: 5px solid var(--accent-color); /* Borde del rosco */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0; /* Evita que el rosco se encoja */
+    box-shadow: 0 0 30px rgba(97, 218, 251, 0.5); /* Sombra para efecto visual */
+    background: radial-gradient(circle at center, #3a3f47 0%, #282c34 100%); /* Degradado de fondo */
+}
+
+/* Estilo para la letra actual en el centro del rosco */
+.current-letter {
+    font-size: 8em; /* Tamaño de fuente grande */
+    font-weight: 700; /* Negrita */
+    color: var(--accent-color);
+    text-shadow: 0 0 15px var(--accent-color); /* Sombra de texto para resaltado */
+    user-select: none; /* Evita la selección de texto */
+}
+
+/* Estilo para cada círculo de letra en el rosco */
+.letter-circle {
+    position: absolute; /* Posicionamiento absoluto para colocarlas alrededor del rosco */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #555; /* Color de fondo por defecto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    user-select: none;
+}
+
+/* Estilo para la letra actual resaltada */
+.letter-circle.current {
+    background-color: var(--accent-color);
+    transform: scale(1.1); /* Ligeramente más grande */
+    box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color); /* Sombra más pronunciada */
+    z-index: 10; /* Asegura que esté por encima de otras letras */
+}
+
+/* Estilos para letras con respuestas correctas, incorrectas y pasadas */
+.letter-circle.correct {
+    background-color: var(--correct-answer-color);
+    border-color: var(--correct-answer-color);
+}
+
+.letter-circle.wrong {
+    background-color: var(--wrong-answer-color);
+    border-color: var(--wrong-answer-color);
+}
+
+.letter-circle.passed {
+    background-color: var(--passed-color);
+    border-color: var(--passed-color);
+}
+
+/* Contenedor de controles (pista, input, botones, y ahora contadores) */
+.controls-container {
+    background-color: #3a3f47;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    gap: 20px; /* Espacio entre los elementos internos */
+    width: 400px; /* Ancho fijo */
+    max-width: 90vw; /* Se adapta a pantallas pequeñas */
+    flex-shrink: 0;
+}
+
+/* Contenedor para los contadores dentro de la tarjeta de controles */
+.stats-and-timer-group {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    gap: 20px;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan si hay poco espacio */
+    margin-bottom: 20px; /* Espacio entre los contadores y la pista */
+}
+
+/* Caja individual de estadística (para Aciertos y Fallos) */
+.stat-box {
+    background-color: #282c34; /* Un color ligeramente diferente para contraste */
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    min-width: 100px; /* Ancho mínimo para cada caja de estadística */
+    flex-grow: 1; /* Permite que crezcan para llenar el espacio */
+    flex-basis: 0; /* Base flexible para que crezcan equitativamente */
+}
+
+.stat-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    color: #ccc;
+}
+
+.stat-value {
+    font-size: 1.6em; /* Ajustado para que quepan ambos números y etiquetas */
+    font-weight: 700;
+    color: var(--accent-color);
+    line-height: 1.2; /* Ajuste de línea para el texto combinado */
+}
+
+.stat-value span.correct-text {
+    color: var(--correct-answer-color);
+}
+
+.stat-value span.wrong-text {
+    color: var(--wrong-answer-color);
+}
+
+
+/* Contenedor del temporizador circular */
+.timer-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #282c34; /* Fondo del temporizador */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    overflow: hidden; /* Oculta el contenido que se desborda del círculo */
+    flex-shrink: 0; /* Evita que se encoja */
+}
+
+/* Canvas para dibujar el temporizador */
+#timerCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Texto del temporizador (segundos restantes) */
+.timer-text {
+    position: relative;
+    z-index: 1; /* Asegura que el texto esté por encima del canvas */
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* Caja de la pista */
+.clue-box {
+    background-color: #282c34;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100px; /* Altura mínima para la pista */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 1.5;
+    border: 1px solid #555;
+}
+
+/* Campo de entrada para la respuesta */
+.answer-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--input-border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    font-size: 1.1em;
+    box-sizing: border-box;
+    outline: none; /* Elimina el contorno al enfocar */
+    transition: border-color 0.3s ease;
+}
+
+.answer-input:focus {
+    border-color: var(--accent-color); /* Cambia el color del borde al enfocar */
+}
+
+/* Grupo de botones */
+.button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Estilos generales para los botones del juego */
+.game-button {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    color: var(--text-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex; /* Para centrar el contenido */
+    align-items: center;
+    justify-content: center;
+}
+
+.game-button:hover {
+    transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.game-button:active {
+    transform: translateY(0); /* Efecto de "presión" al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos específicos para cada tipo de botón */
+.button-answer {
+    background-color: var(--button-bg-color);
+}
+
+.button-answer:hover {
+    background-color: var(--button-hover-color);
+}
+
+.button-pass {
+    background-color: #007bff; /* Azul */
+}
+
+.button-pass:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el botón de reiniciar */
+.button-restart {
+    background-color: #f44336; /* Rojo */
+    padding: 15px; /* Padding por defecto para desktop */
+    width: 60px; /* Ancho fijo para desktop */
+    height: 60px; /* Altura fija para desktop */
+}
+
+.button-restart .fa-sync-alt { /* Estilo para el icono de Font Awesome */
+    font-size: 1.8em; /* Tamaño del icono en desktop */
+    color: var(--text-color); /* Color del icono */
+}
+
+.button-restart:hover {
+    background-color: #da190b;
+}
+
+/* Ajustes responsivos para diferentes tamaños de pantalla */
+@media (max-width: 900px) {
+    .game-container {
+        flex-direction: column; /* Apila los elementos en columnas */
+        align-items: center; /* Centra los elementos */
+    }
+
+    .rosco-area,
+    .controls-container {
+        width: 100%;
+        max-width: 500px; /* Mantiene un ancho máximo para mejor control */
+    }
+
+    .rosco-container {
+        width: 400px;
+        height: 400px;
+    }
+
+    .current-letter {
+        font-size: 6em;
+    }
+
+    .letter-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3em;
+    }
+
+    .stats-and-timer-group {
+        flex-direction: row; /* Mantiene las estadísticas en una fila si hay espacio */
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 550px) {
+    .rosco-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .current-letter {
+        font-size: 4em;
+    }
+
+    .letter-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+    }
+
+    .controls-container {
+        padding: 20px;
+    }
+
+    .clue-box {
+        font-size: 1em;
+        min-height: 80px;
+    }
+
+    .answer-input, .game-button {
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    .button-group {
+        flex-direction: column; /* Apila los botones en columna */
+    }
+
+    .stats-and-timer-group {
+        flex-direction: column; /* Apila las estadísticas en columna */
+        align-items: center;
+        gap: 15px;
+    }
+
+    .stat-box {
+        min-width: unset; /* Elimina el ancho mínimo */
+        width: 80%; /* Ocupa el 80% del ancho disponible */
+    }
+    .button-restart {
+        width: 100%; /* El botón de reiniciar ocupa todo el ancho en móvil */
+        height: auto; /* Altura automática para que se ajuste al padding y contenido */
+        padding: 12px; /* Coincide con el padding de otros botones en móvil */
+    }
+    .button-restart .fa-sync-alt { /* Ajuste del tamaño del icono en móviles */
+        font-size: 1.5em; /* Reducir el tamaño del icono de reinicio en móviles */
+    }
+}
+/* Estilos para el modal de fin de juego */
+.modal-overlay {
+    position: fixed; /* Fijo en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que esté por encima de todo */
+    visibility: hidden; /* Oculto por defecto */
+    opacity: 0; /* Transparente por defecto */
+    transition: visibility 0.3s, opacity 0.3s; /* Transición suave al aparecer/desaparecer */
+}
+
+.modal-overlay.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #3a3f47;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+    max-width: 90vw;
+    width: 500px;
+    transform: translateY(-20px); /* Ligeramente desplazado hacia arriba */
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.visible .modal-content {
+    transform: translateY(0); /* Vuelve a su posición normal al aparecer */
+}
+
+.modal-content h2 {
+    color: var(--accent-color);
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.modal-content button {
+    background-color: var(--button-pass); /* Color del botón de Pasapalabra */
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Estilos para la página de inicio */
+.start-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #3a3f47;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    width: 90%;
+    gap: 20px;
+}
+
+.start-page h1 {
+    color: var(--accent-color);
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.start-page p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.start-page ul {
+    text-align: left;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.start-page ul li {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.start-button {
+    background-color: var(--button-bg-color);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: 1.5em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.start-button:hover {
+    background-color: var(--button-hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Clase para ocultar elementos */
+.hidden {
+    display: none !important;
+}

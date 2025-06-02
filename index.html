@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasapalabra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="start-page" id="startPage">
+        <h1>¡Bienvenido a Pasapalabra!</h1>
+        <p>Pon a prueba tus conocimientos en este emocionante juego de palabras.</p>
+        <h2>Instrucciones:</h2>
+        <ul>
+            <li>Se te presentará una letra y una pista.</li>
+            <li>Debes escribir la palabra que corresponde a la pista y que empieza por la letra indicada.</li>
+            <li>Si aciertas, la letra en el rosco se pondrá verde.</li>
+            <li>Si fallas, la letra se pondrá roja.</li>
+            <li>Puedes usar el botón "Pasapalabra" para saltar una pregunta y volver a ella más tarde.</li>
+            <li>Tienes un tiempo limitado para completar todas las preguntas.</li>
+            <li>¡Intenta conseguir el mayor número de aciertos!</li>
+        </ul>
+        <button class="start-button" id="startButton">Jugar</button>
+    </div>
+
+    <div class="game-container hidden" id="gameContainer">
+        <div class="rosco-area">
+            <div class="rosco-container" id="roscoContainer">
+                <div class="current-letter" id="currentLetter">A</div>
+            </div>
+        </div>
+
+        <div class="controls-container">
+            <div class="stats-and-timer-group">
+                <div class="stat-box">
+                    <h3>Resultados</h3>
+                    <div class="stat-value" id="combinedCount"></div>
+                </div>
+                <div class="timer-container">
+                    <canvas id="timerCanvas"></canvas>
+                    <div class="timer-text" id="timerText"></div>
+                </div>
+            </div>
+
+            <div class="clue-box" id="clueBox">
+                ¡Bienvenido a Pasapalabra! Presiona "Reiniciar" para empezar.
+            </div>
+            <input type="text" id="answerInput" class="answer-input" placeholder="Escribe tu respuesta aquí...">
+            <div class="button-group">
+                <button class="game-button button-answer" id="answerButton">Responder</button>
+                <button class="game-button button-pass" id="passButton">Pasapalabra</button>
+                <button class="game-button button-restart" id="restartButton">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="gameOverModal">
+        <div class="modal-content">
+            <h2 id="modalTitle">¡Juego Terminado!</h2>
+            <p id="modalMessage"></p>
+            <button id="modalRestartButton">Jugar de Nuevo</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
