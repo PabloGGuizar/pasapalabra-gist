@@ -1,5 +1,5 @@
 // js/timer.js
-export const MAX_GAME_TIME = 120; // Tiempo total del juego en segundos (2 minutos)
+export const MAX_GAME_TIME = 240; // Tiempo total del juego en segundos (2 minutos)
 
 let timerInterval = null;
 let timeLeft;
